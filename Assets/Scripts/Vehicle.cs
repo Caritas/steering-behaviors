@@ -22,6 +22,8 @@
 
         public float VelocityLimit => velocityLimit;
 
+        public Vector3 Velocity => velocity;
+
         public void ApplyForce(Vector3 force)
         {
             force /= mass;

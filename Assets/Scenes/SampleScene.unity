@@ -131,8 +131,8 @@ GameObject:
   - component: {fileID: 30267730}
   - component: {fileID: 30267731}
   - component: {fileID: 30267732}
-  - component: {fileID: 30267733}
   - component: {fileID: 30267734}
+  - component: {fileID: 30267733}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 1
   velocityLimit: 10
-  steeringForceLimit: 5
+  steeringForceLimit: 50
 --- !u!114 &30267732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,10 +192,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 30267729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86106ed737ce4ffea035c05a091a62eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 732d4f4486654315ba4b4df4c2a3239c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToFlee: {fileID: 1268115315}
+  circleDistance: 1
+  circleRadius: 2
+  angleChangeStep: 15
 --- !u!114 &30267734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 30267730}
+  arriveRadius: 0
 --- !u!114 &415681374
 MonoBehaviour:
   m_ObjectHideFlags: 0
