@@ -6,10 +6,20 @@ namespace IntroToGameDev.Steering.Behaviors
     {
         [SerializeField]
         private Transform objectToFollow;
+
+        [SerializeField, Range(0,10)]
+        private float arriveRadius;
         
         public override Vector3 GetDesiredVelocity()
         {
-            return (objectToFollow.position - transform.position).normalized * Vehicle.VelocityLimit;
+            var distance = (objectToFollow.position - transform.position);
+            float k = 1;
+            if (distance.magnitude < arriveRadius)
+            {
+                k = distance.magnitude / arriveRadius;
+            }
+
+            return distance.normalized * Vehicle.VelocityLimit * k;
         }
     }
 }

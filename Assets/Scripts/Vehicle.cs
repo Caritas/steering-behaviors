@@ -15,10 +15,10 @@
         [SerializeField, Range(1, 20)]
         private float velocityLimit = 3;
 
-        [SerializeField, Range(1, 20)]
+        [SerializeField, Range(1, 50)]
         private float steeringForceLimit = 5;           
 
-        private const float Epsilon = 0.01f;
+        private const float Epsilon = 0.05f;
 
         public float VelocityLimit => velocityLimit;
 
@@ -51,15 +51,13 @@
                 }
 
                 var desiredVelocity = provider.GetDesiredVelocity();// 
-                var steeringForce = desiredVelocity - velocity;
-                
-                ApplyForce(steeringForce.normalized * steeringForceLimit);
+                var steeringForce = Vector3.ClampMagnitude(desiredVelocity - velocity, steeringForceLimit);
+                ApplyForce(steeringForce);    
             }
 
             void ApplyForces()
             {
                 velocity += acceleration * Time.deltaTime;
-            
                 //limit velocity
                 velocity = Vector3.ClampMagnitude(velocity, velocityLimit);
 
@@ -70,7 +68,7 @@
                     velocity = Vector3.zero;
                     return;
                 }
-            
+
                 transform.position += velocity * Time.deltaTime;
                 acceleration = Vector3.zero;
                 transform.rotation = Quaternion.LookRotation(velocity);
