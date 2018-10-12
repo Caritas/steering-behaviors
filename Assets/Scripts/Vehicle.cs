@@ -46,15 +46,15 @@
 
             void ApplySteeringForce()
             {
-                var provider = GetComponent<DesiredVelocityProvider>();
-                if (provider == null)
+                var providers = GetComponents<DesiredVelocityProvider>();
+                var steering = Vector3.zero;
+                foreach (var provider in providers)
                 {
-                    return;
+                    var desiredVelocity = provider.GetDesiredVelocity() * provider.Weight; //
+                    steering += desiredVelocity - velocity;
+                        
                 }
-
-                var desiredVelocity = provider.GetDesiredVelocity();// 
-                var steeringForce = Vector3.ClampMagnitude(desiredVelocity - velocity, steeringForceLimit);
-                ApplyForce(steeringForce);    
+                ApplyForce(Vector3.ClampMagnitude(steering - velocity, steeringForceLimit));
             }
 
             void ApplyForces()
