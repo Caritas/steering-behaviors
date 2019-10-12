@@ -11,11 +11,11 @@ namespace IntroToGameDev.Steering
 
         private void Update()
         {
-            if (Camera.current == null)
+            if (Camera.main == null)
             {
                 return;
             }
-            var ray = Camera.current.ScreenPointToRay(Input.mousePosition);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             var plane = new Plane(Vector3.up, Vector3.zero);
             if (plane.Raycast(ray, out float distance))
             {
